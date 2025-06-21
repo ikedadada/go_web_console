@@ -1,57 +1,44 @@
 # Go Web Console
 
-Go Web Console is an example web server demonstrating new Go features (1.21+)
-and clean architecture practices. It targets developers who want to evaluate the
-latest language capabilities while learning about layered application design.
+Go Web Console is a sample project showcasing modern Go web development
+practices. It demonstrates a clean architecture approach with manual
+dependency injection and uses Go 1.24 features such as the improved
+`net/http` `ServeMux`, context tracing, and the `slog` structured logging
+package.
 
 ## Requirements
 
-- Go 1.22 or later
+- Go 1.24 or later
 
 ## Setup
 
-```bash
-# Clone and enter the repository
-git clone <repo-url>
-cd go_web_console
+1. Install dependencies (internet access required):
+   ```bash
+   go mod tidy
+   ```
+2. Run the HTTP server:
+   ```bash
+   go run ./cmd/server
+   ```
 
-# Download dependencies
-go mod download
-```
-
-## Usage
-
-Build and run the server:
-
-```bash
-go run ./cmd/server
-```
-
-Run the full test suite:
-
-```bash
-go test ./...
-```
-
-## Directory Layout
+## Directory Overview
 
 ```
-go-web-console/
-├── cmd/                    # entry points
-│   └── server/            # main.go & DI setup
-├── internal/
-│   ├── domain/            # business entities & services
-│   ├── usecase/           # application use cases
-│   ├── interface/         # HTTP controllers & gateways
-│   ├── infrastructure/    # concrete implementations
-│   └── shared/            # common utilities
-├── templates/             # HTML templates
-├── static/                # JS/CSS assets
-├── config/                # configuration files
-├── pgo.prof               # profile for PGO
-├── go.mod
-└── main.go
+cmd/                     Entry points
+  server/                main.go and DI setup
+internal/                Application packages
+  domain/                Entities and domain services
+    model/
+    service/
+  usecase/               Business use cases
+  interface/             HTTP controllers and gateways
+    controller/
+    gateway/
+  infrastructure/        Technical implementations (fs, slog, etc.)
+  shared/                Cross-cutting utilities
+templates/               HTML templates
+static/                  Static files (JS/CSS)
+config/                  Configuration files
 ```
 
-This repository currently contains documentation outlining goals and design.
-Future commits will add the implementation.
+For more details see the [project documents](docs/project/).
